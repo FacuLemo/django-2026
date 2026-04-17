@@ -1,4 +1,5 @@
 ## Instalación del proyecto
+Primero, clonamos el repo. Luego:
 Creamos y activamos el entorno virtual:
 ```
 python3 -m venv venv
@@ -8,7 +9,7 @@ Instalamos Django desde el requirements
 ```
 pip install -r requirements.txt
 ```
-Corremos el servidor de django
+Finalmente corremos el servidor de django
 ```
 python3 manage.py runserver
 ```
