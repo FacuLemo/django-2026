@@ -1,0 +1,19 @@
+{% extends 'saludo/base.html'%}
+
+
+{%block body%}
+    <div>
+        <p class="fondo">Saludos!! {{ nombre }}</p>
+        
+        <h1>Estas son todas las tareas:</h1>
+        <ul>
+        {% for tarea in tareas %}
+            <li>{{ tarea.nombre }}</li>
+            
+        {% endfor %}
+        </ul>
+
+        <p>fin</p>
+
+    </div>
+{%endblock%}
