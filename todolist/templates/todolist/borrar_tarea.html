@@ -1,0 +1,22 @@
+{% extends 'saludo/base.html'%}
+
+{%block body%}
+
+<h1>Borrar tarea</h1>
+
+<form method="post">
+
+    {% csrf_token %}
+    
+    <div>¿Estás seguro de borrar esta tarea?</div>
+    <h3>
+        Tarea: {{ tarea.nombre }}, Completada: {{tarea.completada}}
+    </h3>
+
+    <button type="submit"> Sí, eliminar. </button>
+    <a href="{% url 'tareas' %}">No, volver.</a>
+
+</form>
+
+
+{%endblock%}

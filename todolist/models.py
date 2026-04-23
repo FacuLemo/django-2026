@@ -33,6 +33,7 @@ class Tarea(models.Model):
         blank=True,
         related_name="etiquetas",
     )
+    activo = models.BooleanField(default=True, help_text="Verdadero si NO está archivado")
 
     def __str__(self):
         return f"Soy la tarea: {self.nombre}"
