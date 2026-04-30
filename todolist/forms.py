@@ -12,4 +12,5 @@ class TareaForm(forms.ModelForm):
             "fecha_completado",
             "responsable",
             "etiqueta",
+            "imagen",
         ]

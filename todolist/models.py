@@ -34,9 +34,19 @@ class Tarea(models.Model):
         related_name="etiquetas",
     )
     activo = models.BooleanField(default=True, help_text="Verdadero si NO está archivado")
+    imagen = models.ImageField(upload_to="card_image/", null=True, blank=True)
+
+    def nombre_mayuscula(self):
+        return f"{self.nombre.upper()}"
 
     def __str__(self):
         return f"Soy la tarea: {self.nombre}"
+    
+    class Meta:
+        verbose_name = "Tarea de proyecto"
+        verbose_name_plural = "Tareas de los proyectos"
+        ordering = ["-id"]
+
 
 
 # si creo o modifico un modelo, debo correr:

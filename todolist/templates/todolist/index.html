@@ -9,7 +9,12 @@
     <hr>
 
     {% for tarea in tareas %}
-    <li>{{ tarea.nombre }}, Completada: {{tarea.completada}}. Activo: {{tarea.activo}}</li>
+
+    {%if tarea.imagen%}
+    <img src="{{tarea.imagen.url}}" alt="imagen {{tarea.nombre}}" width="200">
+    {%endif%}
+
+    <li>{{ tarea.nombre_mayuscula }}, Completada: {{tarea.completada}}. Activo: {{tarea.activo}}</li>
     <a href="{%url 'editar' tarea.id %}">Editar esta tarea...</a>
     | <a href="{% url 'borrar' tarea.id %}">BORRAR</a>
     <hr>

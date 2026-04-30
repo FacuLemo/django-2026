@@ -8,11 +8,13 @@
     <title>saludo-index</title>
 </head>
 <body>
-    <nav>nav...
+    <nav>
+        <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
         <a href="{% url 'saludo' %}">Saludar</a>
         <a href="{% url 'adios' %}">Despedir</a>
         <a href="{% url 'tareas' %}">Tareas</a>
         <a href="{% url 'admin:index' %}">Admin</a>
+        <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
 
     </nav>
     {%block body%}
