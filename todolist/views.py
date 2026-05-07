@@ -1,14 +1,32 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+
 
 from .forms import TareaForm
 from .models import Tarea
 
 
+def registrarse(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            login(request, usuario)
+            return redirect('tareas')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {"form":form})
+
+
+@login_required
 def tareas(request):
     tareas = Tarea.objects.filter(activo=True)
     return render(request, "todolist/index.html", {"tareas": tareas})
 
-
+@login_required
 def crear_tarea(request):
     if request.method == "POST":
         form = TareaForm(request.POST, request.FILES)
@@ -24,7 +42,7 @@ def crear_tarea(request):
 # Parametro Ruta: url.com/tarea/5
 # Query Param: url.com/tarea?clave=valor&clave_dos=valor&clave_tres=valor
 
-
+@login_required
 def editar_tarea(request, id):
 
     tarea = get_object_or_404(Tarea, id=id)
@@ -39,7 +57,7 @@ def editar_tarea(request, id):
 
     return render(request, "todolist/editar_tarea.html", {"form": form})
 
-
+@login_required
 def eliminar_tarea(request, id):
 
     tarea = get_object_or_404(Tarea, id=id)
@@ -52,6 +70,11 @@ def eliminar_tarea(request, id):
         return redirect("tareas")
 
     return render(request, "todolist/borrar_tarea.html", {"tarea": tarea})
+
+
+
+
+
 
 
 """

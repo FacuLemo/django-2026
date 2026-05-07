@@ -1,0 +1,19 @@
+
+{% extends 'saludo/base.html'%}
+
+{%block body%}
+
+<hr>
+<h1>Crearse una nueva cuenta</h1>
+<form method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit"> Crear</button>
+</form>
+
+
+{%endblock%}
+
+

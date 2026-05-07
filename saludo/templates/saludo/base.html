@@ -10,10 +10,22 @@
 <body>
     <nav>
         <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
-        <a href="{% url 'saludo' %}">Saludar</a>
-        <a href="{% url 'adios' %}">Despedir</a>
+        <a href="{% url 'saludo' %}">Home</a>
         <a href="{% url 'tareas' %}">Tareas</a>
         <a href="{% url 'admin:index' %}">Admin</a>
+        
+        {%if user.is_authenticated%}
+        <form action="{% url 'logout' %}" method="post">
+            {%csrf_token%}
+            <p>Bienvenido {{user.username}}</p>
+            <button type="submit">Cerrar sesión</button>
+        </form>
+        {%else%}
+        <p>¡¡No estás logeado!! | <a href="{% url 'login' %}">login</a></p>
+    
+        {%endif%}
+
+
         <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
 
     </nav>
