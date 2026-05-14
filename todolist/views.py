@@ -1,32 +1,18 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
-
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.decorators import login_required, permission_required
 
 from .forms import TareaForm
 from .models import Tarea
 
 
-def registrarse(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            usuario = form.save()
-            login(request, usuario)
-            return redirect('tareas')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {"form":form})
-
-
 @login_required
+@permission_required('todolist.view_tarea') #nombre_app.accion_modelo (minuscula)
 def tareas(request):
     tareas = Tarea.objects.filter(activo=True)
     return render(request, "todolist/index.html", {"tareas": tareas})
 
 @login_required
+@permission_required('todolist.add_tarea') #nombre_app.accion_modelo
 def crear_tarea(request):
     if request.method == "POST":
         form = TareaForm(request.POST, request.FILES)
@@ -43,8 +29,8 @@ def crear_tarea(request):
 # Query Param: url.com/tarea?clave=valor&clave_dos=valor&clave_tres=valor
 
 @login_required
+@permission_required('todolist.change_tarea') #nombre_app.accion_modelo
 def editar_tarea(request, id):
-
     tarea = get_object_or_404(Tarea, id=id)
 
     if request.method == "POST":
@@ -58,6 +44,7 @@ def editar_tarea(request, id):
     return render(request, "todolist/editar_tarea.html", {"form": form})
 
 @login_required
+@permission_required('todolist.delete_tarea')
 def eliminar_tarea(request, id):
 
     tarea = get_object_or_404(Tarea, id=id)

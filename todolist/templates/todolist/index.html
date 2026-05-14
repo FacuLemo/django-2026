@@ -15,8 +15,15 @@
     {%endif%}
 
     <li>{{ tarea.nombre_mayuscula }}, Completada: {{tarea.completada}}. Activo: {{tarea.activo}}</li>
+    
+    {% if perms.todolist.change_tarea %}
     <a href="{%url 'editar' tarea.id %}">Editar esta tarea...</a>
-    | <a href="{% url 'borrar' tarea.id %}">BORRAR</a>
+    {%endif%}
+    |
+    {% if perms.todolist.delete_tarea %}
+    <a href="{% url 'borrar' tarea.id %}">BORRAR</a>
+    {%endif%}
+    
     <hr>
     {% endfor %}
 </ul>
