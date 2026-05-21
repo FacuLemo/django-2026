@@ -3,8 +3,12 @@
 {%block body%}
 <ul>
 
-    <h3>Listado de Tareas</h3>
+    <h3>Listado de Tareas - {{year}}</h3>
     <a href="{%url 'crear_tarea'%}">Nueva tarea...</a>
+
+    {%for etiqueta in etiquetas_populares%}
+    <p>{{etiqueta.nombre}}</p>
+    {%endfor%}
 
     <hr>
 

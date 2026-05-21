@@ -17,17 +17,17 @@
         {%if user.is_authenticated%}
         <form action="{% url 'logout' %}" method="post">
             {%csrf_token%}
-            <p>Bienvenido {{user.username}}</p>
+            <p>{{mensaje_bienvenida}}</p>
             <button type="submit">Cerrar sesión</button>
         </form>
         {%else%}
-        <p>¡¡No estás logeado!! | <a href="{% url 'login' %}">login</a></p>
+        <p>{{mensaje_bienvenida}} <a href="{% url 'login' %}">login</a></p>
     
         {%endif%}
 
 
         <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
-
+        {{year}} Todos los derechos reservados.
     </nav>
     {%block body%}
     <!-- acá se agregan cosas dsps -->
