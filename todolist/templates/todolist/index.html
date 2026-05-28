@@ -1,10 +1,10 @@
 {% extends 'saludo/base.html'%}
-
+{% load i18n %}
 {%block body%}
 <ul>
 
-    <h3>Listado de Tareas - {{year}}</h3>
-    <a href="{%url 'crear_tarea'%}">Nueva tarea...</a>
+    <h3>{% translate "Listado de Tareas" %} - {{year}}</h3>
+    <a href="{%url 'crear_tarea'%}">{%translate "Nueva tarea"%}...</a>
 
     {%for etiqueta in etiquetas_populares%}
     <p>{{etiqueta.nombre}}</p>

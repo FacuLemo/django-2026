@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +29,7 @@
 
 
         <img src="{%static 'saludo/itec.jpeg'%}" alt="logo" width="25px">
-        {{year}} Todos los derechos reservados.
+        {{year}} {% translate "Todos los derechos reservados." %}
     </nav>
     {%block body%}
     <!-- acá se agregan cosas dsps -->

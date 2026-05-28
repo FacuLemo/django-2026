@@ -1,6 +1,8 @@
 
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
 
 class Etiqueta(models.Model):
     nombre = models.CharField(max_length=50)
@@ -11,13 +13,13 @@ class Etiqueta(models.Model):
 
 
 class Tarea(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(_("Nombre de la Tarea"),max_length=100)
     completada = models.BooleanField(
+        _("Tarea completada"),
         default=False,
-        help_text="¿La tarea está completada?",
-        verbose_name="Finalización de la tarea"
+        help_text=_("¿La tarea está completada?"),
     )
-    fecha_completado = models.DateField()
+    fecha_completado = models.DateField(_("Fecha de completado"))
     fecha_creacion = models.DateTimeField(auto_now=True)
     responsable = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -26,6 +28,7 @@ class Tarea(models.Model):
         default=None,
         blank=True,
         null=True,
+        verbose_name=_("Persona responsable de la tarea")
     )
     etiqueta = models.ManyToManyField(
         Etiqueta,
@@ -43,8 +46,8 @@ class Tarea(models.Model):
         return f"Soy la tarea: {self.nombre}"
     
     class Meta:
-        verbose_name = "Tarea de proyecto"
-        verbose_name_plural = "Tareas de los proyectos"
+        verbose_name = _("Tarea de proyecto")
+        verbose_name_plural = _("Tareas de los proyectos")
         ordering = ["-id"]
 
 
